@@ -10,16 +10,12 @@ http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/m
 http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd
 http://www.mulesoft.org/schema/mule/jms http://www.mulesoft.org/schema/mule/jms/current/mule-jms.xsd
 http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/json/current/mule-json.xsd">
-    <http:listener-config name="HTTP_Listener_Configuration" host="0.0.0.0" port="8081" doc:name="HTTP Listener Configuration"/>
-    <spring:beans>
-        <spring:bean id="Bean" name="DerbyDataStore" class="com.mulesoft.training.Database"/>
-    </spring:beans>
-    <db:derby-config name="Derby_Connector" url="jdbc:derby:memory:muleEmbeddedDB;create=true" doc:name="Derby Configuration"/>
-    <jms:activemq-connector name="Active_MQ" brokerURL="vm://localhost" validateConnections="true" doc:name="Active MQ"/>
+
     <flow name="mavenFlow">
         <http:listener config-ref="HTTP_Listener_Configuration" path="/hello" allowedMethods="GET" doc:name="HTTP"/>
         <set-payload value="#['Hello Maven']" doc:name="Set Payload"/>
     </flow>
+    
     <flow name="retrieveFlights">
         <http:listener config-ref="HTTP_Listener_Configuration" path="/flights" allowedMethods="GET" doc:name="HTTP"/>
         <db:select config-ref="Derby_Connector" doc:name="Database Query Flights">
@@ -28,6 +24,7 @@ http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/jso
         <json:object-to-json-transformer doc:name="Object to JSON"/>
         <jms:outbound-endpoint queue="flights" connector-ref="Active_MQ" doc:name="sendToJMS"/>
     </flow>
+    
     <flow name="logFlights">
         <jms:inbound-endpoint queue="flights" connector-ref="Active_MQ" doc:name="recvFromJMS"/>
         <logger message="#[payload]" level="INFO" doc:name="Logger"/>
