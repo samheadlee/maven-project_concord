@@ -39,6 +39,7 @@ local.properties
 # PDT-specific
 .buildpath
 
+
 # --------------- #
 # Studio-specific #
 # --------------- #
@@ -46,3 +47,6 @@ local.properties
 flows/
 target/
 **/*.mflow
+
+derby.log
+activemq-data/
