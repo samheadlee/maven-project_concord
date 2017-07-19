@@ -10,6 +10,6 @@ http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/m
     <http:listener-config name="HTTP_Listener_Configuration" host="0.0.0.0" port="8081" doc:name="HTTP Listener Configuration"/>
     <flow name="mavenFlow">
         <http:listener config-ref="HTTP_Listener_Configuration" path="/hello" allowedMethods="GET" doc:name="HTTP"/>
-        <set-payload value="#['Hello World']" doc:name="Set Payload"/>
+        <set-payload value="#['Hello Maven']" doc:name="Set Payload"/>
     </flow>
 </mule>
