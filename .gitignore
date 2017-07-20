@@ -47,6 +47,5 @@ local.properties
 flows/
 target/
 **/*.mflow
-
 derby.log
 activemq-data/
