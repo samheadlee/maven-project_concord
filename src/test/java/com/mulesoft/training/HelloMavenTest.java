@@ -2,9 +2,10 @@ package com.mulesoft.training;
 
 import static org.junit.Assert.*;
 
+import org.junit.Rule;
 import org.junit.Test;
 import org.mule.tck.junit4.FunctionalTestCase;
-import org.mule.tck.junit4.rule.DynamicPort;
+import org.mule.tck.junit4.rule.DynamicPort; 
 
 public class HelloMavenTest extends FunctionalTestCase {
 
